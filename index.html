@@ -91,11 +91,12 @@ h1 em { font-style: normal; color: var(--red); }
 .lede { margin: 0 auto 34px; max-width: 50ch; color: var(--soft); font-size: 1.05rem; text-wrap: pretty; }
 .lede .sign { color: var(--ink); }
 
-/* Contact: a "Get in touch" button opens the form. Without JavaScript the button stays hidden and the form shows. */
+/* Contact: a "Get in touch" button opens the form. Without JavaScript both stay hidden and the email address shows. */
 .contact { width: min(100%, 540px); display: flex; flex-direction: column; align-items: center; gap: 16px; }
 .cta { display: none; }
 .js .cta { display: inline-flex; align-items: center; gap: 14px; font-size: .8rem; padding: 18px 34px; }
 .js .cta[hidden], form[hidden] { display: none; }
+html:not(.js) #contact { display: none; }   /* no JavaScript: only the email address shows */
 .cta::after { /* a small chevron pointing down: something opens */
   content: ""; width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
   transform: translateY(-2px) rotate(45deg); }
@@ -183,7 +184,7 @@ footer { position: relative; z-index: 2; padding: 0 16px 28px; text-align: cente
 
   <div class="contact rise" style="--d:3.55s">
   <button type="button" class="cta" id="open-contact" aria-expanded="false" aria-controls="contact">Get in touch</button>
-  <form id="contact" action="mailto:info@kratos-space.ch" method="post" enctype="text/plain">
+  <form id="contact" method="post">
     <p class="form-title">Want an early look?</p>
     <div class="field">
       <label for="name">Name</label>
@@ -237,7 +238,9 @@ footer { position: relative; z-index: 2; padding: 0 16px 28px; text-align: cente
 
 /* Contact form: the site is static (GitHub Pages), so "Send" opens the
    visitor's own mail app with the message filled in, addressed to TO.
-   Without JavaScript the form's mailto: action does the same, less tidily. */
+   The form has no action: a mailto: action makes browsers flag the form as
+   not secure. Without JavaScript the form stays hidden and the email address
+   below it is the way to write to us. */
 (function () {
   var TO = 'info@kratos-space.ch';
   var form = document.getElementById('contact');
