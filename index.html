@@ -95,7 +95,7 @@ h1 em { font-style: normal; color: var(--red); }
 .cta { display: none; }
 .js .cta { display: inline-flex; align-items: center; gap: 14px; font-size: .8rem; padding: 18px 34px; }
 .js .cta[hidden], form[hidden] { display: none; }
-.hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }   /* Formspree spam trap */
+.hp { display: none !important; }   /* Formspree spam trap. Fully hidden: browser autofill fills off-screen fields, which got a real message flagged as spam */
 .sent { width: 100%; margin: 0; padding: 26px 24px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); text-align: center; }
 .sent strong { display: block; margin-bottom: 6px; font-family: var(--display); font-weight: 400; font-size: .9rem; letter-spacing: .12em; text-transform: uppercase; }
 .sent span { color: var(--soft); }
