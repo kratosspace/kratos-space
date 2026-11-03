@@ -15,7 +15,7 @@
 <style>
 /* Coming-soon page: moving starfield, the KRATOS logo animation building itself in the centre (plays once,
    then floats), the claim, and a contact form. Palette from the logo: navy, off-white, and red only where the
-   logo uses it (the heartbeat line and the delta). */
+   logo uses it (the heartbeat line and the delta). Background glows: one deep blue, the rest orange-red. */
 :root {
   color-scheme: dark;
   --bg: #060918;
@@ -42,17 +42,17 @@ body {
 /* Background layers */
 .nebula { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
 .nebula span { position: absolute; border-radius: 50%; mix-blend-mode: screen; will-change: transform; }
-.nebula .n1 { width: 75vmax; height: 60vmax; left: -26vmax; top: -22vmax;
-  background: radial-gradient(closest-side, rgba(52,78,190,.30), rgba(52,78,190,0));
+.nebula .n1 { width: 75vmax; height: 60vmax; left: -26vmax; top: -22vmax;   /* deep blue, for depth */
+  background: radial-gradient(closest-side, rgba(40,72,170,.26), rgba(40,72,170,0));
   animation: drift1 46s ease-in-out infinite alternate; }
-.nebula .n2 { width: 70vmax; height: 55vmax; right: -26vmax; bottom: -24vmax;
-  background: radial-gradient(closest-side, rgba(84,64,190,.24), rgba(84,64,190,0));
+.nebula .n2 { width: 70vmax; height: 55vmax; right: -26vmax; bottom: -24vmax;  /* orange-red glow */
+  background: radial-gradient(closest-side, rgba(255,92,48,.28), rgba(255,92,48,0));
   animation: drift2 58s ease-in-out infinite alternate; }
-.nebula .n3 { width: 46vmax; height: 38vmax; right: -14vmax; top: -6vmax;   /* a faint red glow: Mars */
-  background: radial-gradient(closest-side, rgba(245,51,63,.11), rgba(245,51,63,0));
+.nebula .n3 { width: 50vmax; height: 42vmax; right: -14vmax; top: -8vmax;   /* red glow: Mars */
+  background: radial-gradient(closest-side, rgba(245,51,63,.20), rgba(245,51,63,0));
   animation: drift3 38s ease-in-out infinite alternate; }
-.nebula .n4 { width: 42vmax; height: 34vmax; left: -6vmax; bottom: -14vmax;
-  background: radial-gradient(closest-side, rgba(56,110,205,.14), rgba(56,110,205,0));
+.nebula .n4 { width: 46vmax; height: 36vmax; left: -8vmax; bottom: -16vmax;   /* low warm glow */
+  background: radial-gradient(closest-side, rgba(255,128,64,.18), rgba(255,128,64,0));
   animation: drift1 52s ease-in-out infinite alternate-reverse; }
 @keyframes drift1 { to { transform: translate(10vmax, 6vmax) scale(1.12) rotate(12deg); } }
 @keyframes drift2 { to { transform: translate(-12vmax, -5vmax) scale(1.15) rotate(-10deg); } }
@@ -277,7 +277,7 @@ footer { position: relative; z-index: 2; padding: 0 16px 28px; text-align: cente
       var g = ctx.createLinearGradient(m.x, m.y, tx, ty);
       g.addColorStop(0, 'rgba(255,245,240,' + (0.95 * fade).toFixed(3) + ')');
       g.addColorStop(0.25, 'rgba(245,51,63,' + (0.40 * fade).toFixed(3) + ')');
-      g.addColorStop(1, 'rgba(90,110,255,0)');
+      g.addColorStop(1, 'rgba(255,128,64,0)');
       ctx.strokeStyle = g; ctx.lineWidth = 1.6; ctx.lineCap = 'round';
       ctx.beginPath(); ctx.moveTo(m.x, m.y); ctx.lineTo(tx, ty); ctx.stroke();
     }
