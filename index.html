@@ -96,7 +96,12 @@ h1 em { font-style: normal; color: var(--red); }
 .cta { display: none; }
 .js .cta { display: inline-flex; align-items: center; gap: 14px; font-size: .8rem; padding: 18px 34px; }
 .js .cta[hidden], form[hidden] { display: none; }
-html:not(.js) #contact { display: none; }   /* no JavaScript: only the email address shows */
+.hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }   /* Formspree spam trap */
+.fine { grid-column: 1 / -1; margin: 2px 0 0; font-size: .78rem; line-height: 1.5; color: var(--muted); }
+.sent { width: 100%; margin: 0; padding: 26px 24px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); text-align: center; }
+.sent strong { display: block; margin-bottom: 6px; font-family: var(--display); font-weight: 400; font-size: .9rem; letter-spacing: .12em; text-transform: uppercase; }
+.sent span { color: var(--soft); }
+button[disabled] { opacity: .6; cursor: progress; transform: none; }
 .cta::after { /* a small chevron pointing down: something opens */
   content: ""; width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
   transform: translateY(-2px) rotate(45deg); }
@@ -184,8 +189,10 @@ footer { position: relative; z-index: 2; padding: 0 16px 28px; text-align: cente
 
   <div class="contact rise" style="--d:3.55s">
   <button type="button" class="cta" id="open-contact" aria-expanded="false" aria-controls="contact">Get in touch</button>
-  <form id="contact" method="post">
+  <form id="contact" action="https://formspree.io/f/mbggqgwo" method="POST">
     <p class="form-title">Want an early look?</p>
+    <input type="hidden" name="_subject" value="New message via kratos-space.ch">
+    <div class="hp" aria-hidden="true"><label for="gotcha">Leave this empty</label><input id="gotcha" type="text" name="_gotcha" tabindex="-1" autocomplete="off"></div>
     <div class="field">
       <label for="name">Name</label>
       <input id="name" name="name" type="text" autocomplete="name" required>
@@ -202,7 +209,9 @@ footer { position: relative; z-index: 2; padding: 0 16px 28px; text-align: cente
     <div class="actions">
       <button type="submit">Send message</button>
     </div>
+    <p class="fine">Your name, email address and message are sent through Formspree (USA), which forwards them to our inbox. We use them only to reply to you.</p>
   </form>
+  <p class="sent" id="sent" role="status" aria-live="polite" hidden><strong>Message sent</strong><span>Thank you. It is on its way to the KRATOS team, and we will reply to the email address you gave.</span></p>
   <p class="direct">or write to <a href="mailto:info@kratos-space.ch">info@kratos-space.ch</a></p>
   </div>
 </main>
@@ -236,29 +245,56 @@ footer { position: relative; z-index: 2; padding: 0 16px 28px; text-align: cente
   });
 })();
 
-/* Contact form: the site is static (GitHub Pages), so "Send" opens the
-   visitor's own mail app with the message filled in, addressed to TO.
-   The form has no action: a mailto: action makes browsers flag the form as
-   not secure. Without JavaScript the form stays hidden and the email address
-   below it is the way to write to us. */
+/* Contact form: the site is static (GitHub Pages), so messages go through
+   Formspree, which emails them to the team. The script sends the same request
+   as Formspree's own library (POST to the form's action, Accept:
+   application/json, FormData body) and shows the result on the page. Without
+   JavaScript the form posts to Formspree directly and Formspree shows its own
+   thank-you page. Every failure is shown to the visitor with the email address
+   as the way out, and logged as a [WARN]. */
 (function () {
   var TO = 'info@kratos-space.ch';
   var form = document.getElementById('contact');
   var status = document.getElementById('status');
+  var sent = document.getElementById('sent');
+  var send = form.querySelector('button[type="submit"]');
+  function fail(detail, shown) {
+    console.warn('[WARN] contact form: expected=Formspree success, got=' + detail + ', fallback=asked the visitor to write to ' + TO);
+    status.textContent = shown + ' You can also write to ' + TO + '.';
+  }
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    var name = form.elements.name.value.trim();
-    var email = form.elements.email.value.trim();
-    var message = form.elements.message.value.trim();
-    if (!name || !message) {
-      status.textContent = 'Please fill in your name and a message.';
-      (name ? form.elements.message : form.elements.name).focus();
+    var empty = ['name', 'email', 'message'].filter(function (f) { return !form.elements[f].value.trim(); });
+    if (empty.length) {
+      status.textContent = 'Please fill in your name, email and message.';
+      form.elements[empty[0]].focus();
       return;
     }
-    var subject = 'Message from ' + name + ' via kratos-space.ch';
-    var body = (message + '\n\n-- \n' + name + '\n' + email).replace(/\r?\n/g, '\r\n');
-    window.location.href = 'mailto:' + TO + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-    status.textContent = 'Your mail app should now open with the message ready to send. If nothing opens, write to ' + TO + ' directly.';
+    status.textContent = '';
+    send.disabled = true;
+    send.textContent = 'Sending…';
+    fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } })
+      .then(function (res) {
+        return res.json().catch(function () { return {}; }).then(function (body) { return { ok: res.ok, code: res.status, body: body }; });
+      })
+      .then(function (r) {
+        if (r.ok) {
+          form.reset();
+          form.hidden = true;
+          sent.hidden = false;
+          return;
+        }
+        var msgs = Array.isArray(r.body.errors) ? r.body.errors.map(function (x) { return x.message; }) : [];
+        if (!msgs.length && r.body.error) msgs = [r.body.error];
+        fail('HTTP ' + r.code + ' ' + JSON.stringify(r.body), (msgs.join(' ') || 'The message could not be sent.'));
+      })
+      .catch(function (err) {
+        fail('network error: ' + err, 'The message could not be sent. Please check your connection.');
+      })
+      .then(function () {
+        send.disabled = false;
+        send.textContent = 'Send message';
+      });
   });
 })();
 
