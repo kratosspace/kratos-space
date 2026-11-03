@@ -128,9 +128,6 @@ textarea { resize: vertical; min-height: 116px; }
 input::placeholder, textarea::placeholder { color: rgba(201,207,230,.45); }
 input:focus, textarea:focus { outline: none; border-color: rgba(238,28,46,.8); background: rgba(255,255,255,.08); box-shadow: 0 0 0 3px rgba(238,28,46,.24); }
 .actions { grid-column: 1 / -1; display: flex; align-items: center; justify-content: flex-end; gap: 12px 16px; flex-wrap: wrap; margin-top: 4px; }
-.direct { margin: 0; font-size: .86rem; color: var(--muted); }
-.direct a { color: var(--soft); text-underline-offset: 3px; }
-.direct a:hover { color: var(--ink); }
 button {
   font-family: var(--display); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase;
   min-height: 44px; padding: 14px 26px; border: 0; border-radius: 999px; cursor: pointer;
@@ -139,7 +136,7 @@ button {
   transition: transform .15s, box-shadow .2s, background .2s;
 }
 button:hover { transform: translateY(-1px); background: #FFFFFF; box-shadow: 0 14px 34px -12px rgba(238,28,46,.75); }
-button:focus-visible, .direct a:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+button:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
 .status { grid-column: 1 / -1; margin: 0; font-size: .9rem; color: var(--soft); }
 .status:empty { display: none; }
 
@@ -212,7 +209,6 @@ footer a:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; bor
     </div>
   </form>
   <p class="sent" id="sent" role="status" aria-live="polite" hidden><strong>Message sent</strong><span>Thank you. It is on its way to the KRATOS team, and we will reply to the email address you gave.</span></p>
-  <p class="direct">or write to <a href="mailto:info@kratos-space.ch">info@kratos-space.ch</a></p>
   </div>
 </main>
 
