@@ -96,7 +96,6 @@ h1 em { font-style: normal; color: var(--red); }
 .js .cta { display: inline-flex; align-items: center; gap: 14px; font-size: .8rem; padding: 18px 34px; }
 .js .cta[hidden], form[hidden] { display: none; }
 .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }   /* Formspree spam trap */
-.fine { grid-column: 1 / -1; margin: 2px 0 0; font-size: .78rem; line-height: 1.5; color: var(--muted); }
 .sent { width: 100%; margin: 0; padding: 26px 24px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); text-align: center; }
 .sent strong { display: block; margin-bottom: 6px; font-family: var(--display); font-weight: 400; font-size: .9rem; letter-spacing: .12em; text-transform: uppercase; }
 .sent span { color: var(--soft); }
@@ -157,9 +156,9 @@ button:focus-visible, .direct a:focus-visible { outline: 2px solid var(--red); o
 .logos .sph { height: 30px; filter: brightness(0) invert(1); }   /* the SPH file is black; shown white here */
 
 footer { position: relative; z-index: 2; padding: 0 16px 28px; text-align: center; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-footer a, .fine a { color: var(--soft); text-underline-offset: 3px; }
-footer a:hover, .fine a:hover { color: var(--ink); }
-footer a:focus-visible, .fine a:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; border-radius: 3px; }
+footer a { color: var(--soft); text-underline-offset: 3px; }
+footer a:hover { color: var(--ink); }
+footer a:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; border-radius: 3px; }
 
 @media (max-width: 560px) {
   main { padding-top: 36px; }
@@ -211,7 +210,6 @@ footer a:focus-visible, .fine a:focus-visible { outline: 2px solid var(--red); o
     <div class="actions">
       <button type="submit">Send message</button>
     </div>
-    <p class="fine">Your name, email address and message are sent through Formspree (USA), which forwards them to our inbox. We use them only to reply to you. <a href="privacy.html">Privacy</a></p>
   </form>
   <p class="sent" id="sent" role="status" aria-live="polite" hidden><strong>Message sent</strong><span>Thank you. It is on its way to the KRATOS team, and we will reply to the email address you gave.</span></p>
   <p class="direct">or write to <a href="mailto:info@kratos-space.ch">info@kratos-space.ch</a></p>
