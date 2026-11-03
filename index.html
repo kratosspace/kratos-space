@@ -157,6 +157,9 @@ button:focus-visible, .direct a:focus-visible { outline: 2px solid var(--red); o
 .logos .sph { height: 30px; filter: brightness(0) invert(1); }   /* the SPH file is black; shown white here */
 
 footer { position: relative; z-index: 2; padding: 0 16px 28px; text-align: center; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+footer a, .fine a { color: var(--soft); text-underline-offset: 3px; }
+footer a:hover, .fine a:hover { color: var(--ink); }
+footer a:focus-visible, .fine a:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; border-radius: 3px; }
 
 @media (max-width: 560px) {
   main { padding-top: 36px; }
@@ -208,7 +211,7 @@ footer { position: relative; z-index: 2; padding: 0 16px 28px; text-align: cente
     <div class="actions">
       <button type="submit">Send message</button>
     </div>
-    <p class="fine">Your name, email address and message are sent through Formspree (USA), which forwards them to our inbox. We use them only to reply to you.</p>
+    <p class="fine">Your name, email address and message are sent through Formspree (USA), which forwards them to our inbox. We use them only to reply to you. <a href="privacy.html">Privacy</a></p>
   </form>
   <p class="sent" id="sent" role="status" aria-live="polite" hidden><strong>Message sent</strong><span>Thank you. It is on its way to the KRATOS team, and we will reply to the email address you gave.</span></p>
   <p class="direct">or write to <a href="mailto:info@kratos-space.ch">info@kratos-space.ch</a></p>
@@ -224,7 +227,7 @@ footer { position: relative; z-index: 2; padding: 0 16px 28px; text-align: cente
   </div>
 </section>
 
-<footer>© 2026 Kratos Space · Zürich, Switzerland</footer>
+<footer>© 2026 Kratos Space · Zürich, Switzerland · <a href="privacy.html">Privacy</a></footer>
 
 <script>
 /* "Get in touch" opens the form and puts the cursor in the first field. */

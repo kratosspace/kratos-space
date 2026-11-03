@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy · KRATOS</title>
+<meta name="description" content="How the KRATOS website handles personal data: the contact form, hosting and fonts.">
+<meta name="theme-color" content="#070A17">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Michroma&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* Privacy page: same palette and type as the home page, built for reading. */
+:root {
+  color-scheme: dark;
+  --bg: #020308;
+  --ground: #070A17;
+  --ink: #EEF1FA;
+  --soft: #C9CFE6;
+  --muted: #9AA3C7;
+  --red: #EE1C2E;
+  --line: rgba(238,241,250,.16);
+  --display: "Michroma", "Eurostile", "Arial Black", sans-serif;
+  --body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { min-height: 100vh; background: radial-gradient(ellipse 80% 60% at 50% 0%, var(--ground) 0%, var(--bg) 100%) fixed, var(--bg);
+  color: var(--soft); font: 1rem/1.7 var(--body); }
+.wrap { max-width: 720px; margin: 0 auto; padding: 40px 16px 56px; }
+.home { display: inline-flex; align-items: center; gap: 12px; color: var(--ink); text-decoration: none;
+  font-family: var(--display); font-size: .9rem; letter-spacing: .12em; }
+.home img { width: 32px; height: 32px; border-radius: 8px; }
+.home:hover { color: #fff; }
+a:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; border-radius: 4px; }
+h1 { margin: 40px 0 6px; font-family: var(--display); font-weight: 400; font-size: clamp(1.5rem, 5vw, 2.1rem); letter-spacing: .05em; color: var(--ink); }
+.updated { margin: 0 0 28px; font-size: .85rem; color: var(--muted); }
+.lede { margin: 0 0 8px; font-size: 1.05rem; }
+h2 { margin: 36px 0 10px; font-size: .78rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--ink); }
+p { margin: 0 0 12px; }
+ul { margin: 0 0 12px; padding-left: 1.2em; }
+li { margin: 0 0 8px; }
+li::marker { color: var(--red); }
+strong { color: var(--ink); font-weight: 600; }
+a { color: var(--ink); text-underline-offset: 3px; }
+footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="home" href="./"><img src="assets/favicon.svg" alt="" width="32" height="32">KRATOS</a>
+
+  <h1>Privacy</h1>
+  <p class="updated">Last updated: 3 November 2026</p>
+  <p class="lede">This website is small on purpose. It sets no cookies and uses no analytics or tracking. Personal data only reaches us when you write to us.</p>
+
+  <h2>Who is responsible</h2>
+  <p>Kratos Space, the KRATOS team, a student team at ETH Zurich, Zürich, Switzerland.<br>
+  Contact: <a href="mailto:info@kratos-space.ch">info@kratos-space.ch</a></p>
+
+  <h2>What we collect and why</h2>
+  <ul>
+    <li><strong>Contact form:</strong> your name, email address and message. We use them only to reply to you and to follow up on your request.</li>
+    <li><strong>Visiting the site:</strong> to deliver the pages, the hosting provider processes technical data such as your IP address, browser and the time of your visit. We do not see or use this data.</li>
+    <li><strong>Fonts:</strong> the fonts are loaded from Google Fonts, so your browser sends your IP address to Google when the page loads.</li>
+  </ul>
+
+  <h2>Who processes it</h2>
+  <ul>
+    <li><strong>Formspree, Inc. (USA)</strong> receives messages from the contact form, keeps them in our Formspree account and forwards them to our inbox by email. <a href="https://formspree.io/legal/privacy-policy" target="_blank" rel="noopener">Formspree privacy policy</a></li>
+    <li><strong>GitHub, Inc. (USA)</strong> hosts this website through GitHub Pages. <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub privacy statement</a></li>
+    <li><strong>Google (USA)</strong> serves the fonts through Google Fonts. <a href="https://developers.google.com/fonts/faq/privacy" target="_blank" rel="noopener">Google Fonts privacy FAQ</a></li>
+    <li><strong>Our email provider, Swizzonic,</strong> hosts the inbox at info@kratos-space.ch where your message arrives.</li>
+  </ul>
+  <p>Formspree, GitHub and Google may process data in the USA. When your data goes there, it is protected by the safeguards these providers describe in their privacy policies.</p>
+
+  <h2>How long we keep it</h2>
+  <p>We keep your message only as long as we need it to answer you and follow up. After that we delete it from our inbox and from our Formspree account.</p>
+
+  <h2>Your rights</h2>
+  <p>You can ask us what data we have about you, and ask us to correct or delete it. Just write to <a href="mailto:info@kratos-space.ch">info@kratos-space.ch</a>. You can also contact the Swiss Federal Data Protection and Information Commissioner (<a href="https://www.edoeb.admin.ch/" target="_blank" rel="noopener">FDPIC</a>).</p>
+
+  <footer>© 2026 Kratos Space · Zürich, Switzerland · <a href="./">Home</a></footer>
+</div>
+</body>
+</html>
